@@ -58,7 +58,7 @@ task("approve", "approves tokens transfer for another person")
   })
 
 
-//npx hardhat transferFrom --signernumber <number from 0 to 20> --spendernumber <number from 0 to 20> --approve <amount of money> --amount <approving of amount of money> 
+//npx hardhat transferFrom --contractaddress 0xf4dD841e4D76Dfc6df8526BA4cB6bEDa0917D9c7 --address 0xFC5210de76F2083900906BE4E41C3F45c7Cb8AD1 --amount <approving of amount of money> 
 task("transferFrom", "transfer tokens from  person who gave allowance")
   .addParam("contractaddress", "address of deployed contract")
   .addParam("address", "address which we want to transfer")
@@ -70,30 +70,7 @@ task("transferFrom", "transfer tokens from  person who gave allowance")
     await myToken.transferFrom(owner.address, taskArgs.address, taskArgs.amount)
     console.log("balance of " + owner.address + " now is " + (await myToken.balanceOf(owner.address)).toString());
     console.log("balance of " + taskArgs.address + " now is " + (await myToken.balanceOf(taskArgs.address)).toString());
-
   })
-
-
-
-// //npx hardhat transferFrom --signernumber <number from 0 to 20> --spendernumber <number from 0 to 20> --approve <amount of money> --amount <approving of amount of money> 
-// task("transferFrom", "transfer tokens from  person who gave allowance")
-//   .addParam("signernumber", "choose signer number from 0 to 20 which are provided by Hardhat and who will give allowance to someone transfer tokens")
-//   .addParam("spendernumber", "choose spendernumber, his address will be allowed to transfer tokens from signer account")
-//   .addParam("approve", "amount money to approve")
-//   .addParam("amount", "amount money to transfer")
-//   .setAction(async (taskArgs, hre) => {
-//     const signer = await hre.ethers.getSigners();
-//     const MyToken = await hre.ethers.getContractFactory("MyToken");
-//     const myToken = await MyToken.connect(signer[taskArgs.signernumber]).deploy();
-//     await myToken.deployed();
-//     await myToken.connect(signer[taskArgs.signernumber]).approve(signer[taskArgs.spendernumber].address, taskArgs.approve)
-//     console.log("allowance for " + signer[taskArgs.spendernumber].address + " now is " + (await myToken.allowance(signer[taskArgs.signernumber].address, signer[taskArgs.spendernumber].address)).toString());
-//     await myToken.connect(signer[taskArgs.spendernumber]).transferFrom(signer[taskArgs.signernumber].address, signer[taskArgs.spendernumber].address, taskArgs.amount)
-//     console.log("balance of " + signer[taskArgs.spendernumber].address + " now is " + (await myToken.balanceOf(signer[taskArgs.spendernumber].address)).toString());
-//     console.log("balance of " + signer[taskArgs.signernumber].address + " now is " + (await myToken.balanceOf(signer[taskArgs.signernumber].address)).toString());
-//     //expect(await myToken.balanceOf(signers[1].address)).to.equal(10);
-//   })
-
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
