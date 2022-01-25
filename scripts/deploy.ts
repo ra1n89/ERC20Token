@@ -18,7 +18,7 @@ async function main() {
   const myToken = await MyToken.deploy();
 
   await myToken.deployed();
-
+  //ethers.getContractAt("MyToken", )
   console.log("MyToken deployed to:", myToken.address);
 }
 
