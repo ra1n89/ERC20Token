@@ -12,8 +12,8 @@ MyToken "MTN" (ERC20)
 
 Сформированные tasks:
 
-- npx hardhat transfer --address <address> --amount <amount of tokens>
-- npx hardhat approve --address <address> --amount <amount of tokens> 
-- npx hardhat transferFrom --signernumber <number from 0 to 20> --spendernumber <number from 0 to 20> --approve <amount of money> --amount <approving of amount of money>
+- npx hardhat transfer
+- npx hardhat approve
+- npx hardhat transferFrom
 
-Верифицированный контракт - https://rinkeby.etherscan.io/address/0x25389935557D78C2891FaDA1cC16F79fF03aeDF4
+Верифицированный контракт - https://rinkeby.etherscan.io/address/0xf4dD841e4D76Dfc6df8526BA4cB6bEDa0917D9c7
