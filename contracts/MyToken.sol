@@ -55,6 +55,7 @@ contract MyToken {
         _balances[_from] -= _value;
         _balances[_to] += _value;
         _allowance[_from][msg.sender] -= _value;
+        emit Transfer(_from, _to, _value);
         return true;
     }
 
@@ -77,26 +78,26 @@ contract MyToken {
 
     function increaseAllowance(address _spender, uint256 _amount) public {
         _allowance[msg.sender][_spender] += _amount;
-        emit Approval(msg.sender, _spender, _amount);
+        emit Approval(msg.sender, _spender, _allowance[msg.sender][_spender]);
     }
 
     function decreaseAllowance(address _spender, uint256 _amount) public {
         _allowance[msg.sender][_spender] -= _amount;
-        emit Approval(msg.sender, _spender, _amount);
+        emit Approval(msg.sender, _spender, _allowance[msg.sender][_spender]);
     }
 
-    function burn(uint256 _amount) public {
+    function burn(address account, uint256 _amount) public {
         require(_balances[msg.sender] >= _amount, "lack of balance");
         _totalSupply -= _amount;
-        _balances[msg.sender] -= _amount;
-        emit Transfer(msg.sender, msg.sender, _amount);
+        _balances[account] -= _amount;
+        emit Transfer(account, address(0), _amount);
     }
 
     function mint(address _to, uint256 _amount) public {
         require(msg.sender == owner, "only owner can mint new tokens");
         _totalSupply += _amount;
         _balances[_to] += _amount;
-        emit Transfer(msg.sender, msg.sender, _amount);
+        emit Transfer(address(0), _to, _amount);
     }
 
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
