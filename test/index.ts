@@ -3,7 +3,6 @@ import { expect } from "chai";
 import { assert } from "console";
 import { ethers } from "hardhat";
 import { MyToken, MyToken__factory } from "../typechain";
-// import { MyToken, MyToken__factory } from "../typechain";
 
 describe("MyToken", function () {
   let myToken: MyToken;
@@ -19,8 +18,6 @@ describe("MyToken", function () {
     await myToken.deployed();
   })
 
-
-  //проверка view функций
   it("Checking that functions name(), symbol(), symbol(), totalSupply() work correctly", async function () {
     const name = "My Token";
     const symbol = "MTN";
@@ -31,7 +28,6 @@ describe("MyToken", function () {
 
   });
 
-  //проверка функции mint()
   it("Checking function mint() works correctly", async function () {
     const [Bob, John] = signers;
     const amount = 100;
@@ -41,7 +37,6 @@ describe("MyToken", function () {
     expect((await myToken.totalSupply())).to.equal(amount)
   });
 
-  //проверка функции balanceOf()
   it("Checking function balanceOf() works correctly", async function () {
     const [Bob, John] = signers;
     const amountBob = 100;
@@ -54,7 +49,6 @@ describe("MyToken", function () {
     expect(await myToken.balanceOf(John.address)).to.equal(amountJohn);
   });
 
-  //проверка функции transfer() и эвента
   it("Checking function transfer() works correctly", async function () {
     const [Bob, John] = signers;
     const amountMint = 100;
@@ -68,7 +62,6 @@ describe("MyToken", function () {
     expect(await myToken.balanceOf(John.address)).to.equal(amountTransfer);
   });
 
-  //проверка функций aprove(), её эвента, а также функций allowance(), increaseAllowance(), decreaseAllowance()
   it("Checking function aprove(), allowance(), increaseAllowance(), decreaseAllowance() work correctly", async function () {
     const [Bob, John] = signers;
     const amount = 100;
@@ -83,7 +76,6 @@ describe("MyToken", function () {
     expect(await myToken.allowance(Bob.address, John.address)).to.equal(amount + changingAmount - changingAmount)
   });
 
-  //проверка функции transferFrom() 
   it("Checking function transferFrom() works correctly", async function () {
     const [Bob, John] = signers;
     const amount = 100;
@@ -97,7 +89,6 @@ describe("MyToken", function () {
     expect(await myToken.balanceOf(John.address)).to.equal(amount);
   });
 
-  //проверка функции burn()
   it("Checking function burn() works correctly", async function () {
     const [Bob, John] = signers;
     const amount = 100;
